@@ -1,0 +1,173 @@
+@import "./variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Mali&display=swap");
+.flex-space-btw {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// basic configs
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter";
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+li {
+  margin: 0px;
+  padding: 0px;
+}
+::placeholder {
+  color: $fadeText;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  color: $fadeText;
+}
+:-ms-input-placeholder {
+  color: $fadeText;
+}
+
+::selection {
+  background-color: $accentColor;
+}
+::-moz-selection {
+  background-color: $accentColor;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $accentColor;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primaryColor;
+}
+
+.lucius {
+  .navBar {
+    font-family: "mali";
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+    a {
+      margin-left: 20px;
+    }
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+  .textCenter {
+    text-align: center;
+  }
+  hr {
+    height: 1px;
+    background-color: #efefef;
+    margin: 10px 0px;
+  }
+  button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: $radius;
+  }
+  .overflowX {
+    overflow-x: auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-auto-flow: column;
+  }
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .grid3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+  }
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .paragraphFade {
+    color: $fadeText;
+  }
+
+  .flex {
+    display: flex;
+  }
+  .flexEnd {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  select,
+  input[type="text"],
+  input[type="phone"],
+  input[type="date"],
+  input[type="email"],
+  input[type="number"],
+  input[type="datetime-local"],
+  textarea {
+    transition: $ease;
+    width: 100%;
+    padding: 15px;
+    color: $title;
+    border: 1px solid $borderColor;
+    outline: none;
+    border-radius: $radius;
+  }
+  input:focus,
+  textarea:focus {
+    border: 0.1px solid $accentColor;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  .container1 {
+    width: 90%;
+    margin: auto;
+  }
+  .container2 {
+    width: 80%;
+    margin: auto;
+  }
+  .cardBackground {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+  }
+}
