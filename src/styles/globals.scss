@@ -85,6 +85,7 @@ li {
     }
   }
   .footer {
+    font-family: "mali";
     margin-top: 100px;
     width: 100%;
     padding: 50px;
@@ -93,12 +94,12 @@ li {
     a {
       color: #fff;
       display: inline-block;
-      margin-bottom: 20px;
       &:not(:last-child) {
         margin-right: 15px;
       }
     }
     .logo {
+      margin-top: 20px;
       height: 80px;
       width: 90px;
     }
@@ -109,6 +110,22 @@ li {
   }
   .pointer {
     cursor: pointer;
+  }
+  .title {
+    color: $title;
+  }
+  .heading {
+    width: 50%;
+  }
+  .padChildren {
+    padding: 50px 0px;
+  }
+  .margin-t-b {
+    margin: 50px 0px;
+  }
+  .lightFont {
+    font-weight: 300;
+    color: $fadeText;
   }
   .textCenter {
     text-align: center;
@@ -124,6 +141,21 @@ li {
     cursor: pointer;
     padding: 10px;
     border-radius: $radius;
+    color: #fff;
+  }
+  .primaryColor {
+    color: $primaryColor;
+  }
+  .accentColor {
+    color: $accentColor;
+  }
+  .primaryColorBg {
+    color: #fff;
+    background-color: $primaryColor;
+  }
+  .accentColorBg {
+    color: #fff;
+    background-color: $accentColor;
   }
   .overflowX {
     overflow-x: auto;
@@ -136,12 +168,12 @@ li {
   .grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 40px;
   }
   .grid3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
+    gap: 40px;
   }
   .centered {
     display: flex;

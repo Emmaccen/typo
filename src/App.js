@@ -3,6 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import TestPage from "./pages/TestPage";
 import ScrollToTop from "./utils/shared-function/ScrollToTop";
+import Layout from "./components/shared-components/Layout";
 import "./styles/globals.scss";
 function App() {
   return (
@@ -15,11 +16,13 @@ function App() {
 const MainComponent = () => (
   <>
     <ScrollToTop />
-    <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/test" element={<TestPage />} />
-      <Route exact path="/dashboard" element={<Dashboard />} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/test" element={<TestPage />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Layout>
   </>
 );
 
