@@ -74,13 +74,39 @@ li {
 .lucius {
   .navBar {
     font-family: "mali";
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
     a {
       margin-left: 20px;
+      transition: $ease;
+      &:hover {
+        color: $primaryColor;
+      }
     }
   }
-
+  .footer {
+    margin-top: 100px;
+    width: 100%;
+    padding: 50px;
+    background-color: #333;
+    &,
+    a {
+      color: #fff;
+      display: inline-block;
+      margin-bottom: 20px;
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+    }
+    .logo {
+      height: 80px;
+      width: 90px;
+    }
+  }
+  .logo {
+    height: 50px;
+    width: 60px;
+  }
   .pointer {
     cursor: pointer;
   }
