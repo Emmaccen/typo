@@ -1,0 +1,26 @@
+@import "./variables.scss";
+
+.lucius {
+  .testStartPageContainer {
+    margin-top: 50px;
+    .textInputArea {
+      grid-template-columns: 70% 30%;
+      gap: 30px;
+      .analytics {
+        border: 0.5px solid $borderColor;
+        padding: 15px;
+        border-radius: $radius;
+        align-items: flex-start;
+      }
+      textarea {
+        margin-top: 20px;
+      }
+      .typingTextContainer {
+        .cardBackground {
+          max-height: 300px;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+}

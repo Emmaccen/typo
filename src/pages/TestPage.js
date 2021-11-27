@@ -1,5 +1,6 @@
+import { Button } from "antd";
 import React from "react";
-import { Checkbox, Button } from "antd";
+import { Link } from "react-router-dom";
 
 const TestTemplateCard = () => {
   return (
@@ -25,9 +26,11 @@ const TestPage = () => {
         </h2>
       </div>
       <div className="flexEnd">
-        <Button className="primaryColorBg" primary size="large">
-          Create New
-        </Button>
+        <Link to="./start/3">
+          <Button className="primaryColorBg" primary size="large">
+            Create New
+          </Button>
+        </Link>
       </div>
       <div className="grid3 margin-t-b">
         <TestTemplateCard />
