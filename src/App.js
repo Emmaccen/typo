@@ -21,7 +21,7 @@ const MainComponent = () => (
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/test" element={<TestPage />} />
-        <Route exact path="/test/start/:id" element={<TestStartPage />} />
+        <Route exact path="/test/start" element={<TestStartPage />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Layout>

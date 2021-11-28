@@ -6,6 +6,9 @@
     .textInputArea {
       grid-template-columns: 65% 35%;
       gap: 30px;
+      .actionBtns {
+        margin-top: 20px;
+      }
       .analytics {
         border: 0.5px solid $borderColor;
         padding: 15px;

@@ -58,7 +58,7 @@ const calculateTimeLeft = ({ initialTime, timeLeft }) => {
   //   let left = (((timeLeft - 1000) / initialTime) * 100).toFixed(0);
   return {
     initialTime,
-    timeLeft: timeLeft - 1000,
+    timeLeft: timeLeft - 1,
   };
 };
 

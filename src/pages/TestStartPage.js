@@ -1,9 +1,11 @@
 import { CheckCircleOutlined, WarningOutlined } from "@ant-design/icons";
-import { Badge, Input, Progress, Divider } from "antd";
+import { Badge, Input, Progress, Divider, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import TypingTextContainer from "../components/shared-components/TypingTextContainer";
 import "../styles/testStartPage.scss";
 import { calculator } from "../utils/shared-function/testCalculator";
+import { useLocation, useNavigate } from "react-router-dom";
+import { dataHandler } from "../utils/shared-function/dataHandler";
 const { TextArea } = Input;
 
 const content =
@@ -11,6 +13,9 @@ const content =
 
 const TestStartPage = () => {
   const [refresh, setRefresh] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [userTimer, setUserTimer] = useState({
     initialTime: 120_000,
     timeLeft: 120_000,
@@ -35,6 +40,21 @@ const TestStartPage = () => {
   });
 
   useEffect(() => {
+    // check if user is not manually routing to this page
+    // if they are? take them back to test page
+    !location?.state?.newChallenge && navigate("/test", { replace: true });
+  }, []);
+
+  useEffect(() => {
+    // window.speechSynthesis.speak(new SpeechSynthesisUtterance(content));
+    let data = dataHandler.getStateFromLocalStorage("userInfo");
+    setUserTimer({
+      initialTime: data.userTimer,
+      timeLeft: data.userTimer,
+    });
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
       setRefresh(new Date().getTime().toLocaleString());
       setResult({
@@ -51,7 +71,7 @@ const TestStartPage = () => {
   useEffect(() => {
     const startTimer = setInterval(() => {
       setUserTimer((time) => {
-        return time.timeLeft >= 1000
+        return time.timeLeft >= 1
           ? calculator.calculateTimeLeft(time)
           : (() => {
               clearInterval(startTimer);
@@ -79,6 +99,18 @@ const TestStartPage = () => {
             placeholder="Start typing here..."
             rows={6}
           />
+          <div className="flex-space-btw actionBtns">
+            <Button
+              className="largeBtn"
+              style={{ backgroundColor: "#333" }}
+              size="large"
+            >
+              Clear / Reset
+            </Button>
+            <Button className="largeBtn" size="large">
+              Submit Challenge
+            </Button>
+          </div>
         </div>
 
         <div className="analytics">
