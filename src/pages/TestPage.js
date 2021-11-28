@@ -2,21 +2,9 @@ import { Button, Divider, Form, Input, Modal, Select, Tooltip } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dataHandler } from "../utils/shared-function/dataHandler";
+import { calculator } from "../utils/shared-function/testCalculator";
+import { templates } from "../utils/preStoredTestData";
 const { TextArea } = Input;
-const TestTemplateCard = () => {
-  return (
-    <div className="cardBackground">
-      <div className="flexEnd">
-        <span className="lightFont">5Mins</span>
-      </div>
-      <p>
-        Another important reason for using the element prop in v6 is that is
-        reserved for nesting routes. This is one of people's favorite features
-        from v3 and @reach/router, and we're bringing it back in v6.
-      </p>
-    </div>
-  );
-};
 
 const TestPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -38,13 +26,33 @@ const TestPage = () => {
     setIsModalVisible(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (userInfo) => {
     dataHandler.setStateInLocalStorage("userInfo", userInfo);
     navigate("/test/start", {
       state: {
         newChallenge: true,
       },
     });
+  };
+
+  const TestTemplateCard = ({ text }) => {
+    let time = calculator.calculateAverageTimeRequiredToType(text);
+    return (
+      <div
+        onClick={() =>
+          handleSubmit({
+            textContent: text,
+            userTimer: time * 60,
+          })
+        }
+        className="cardBackground pointer"
+      >
+        <div className="flexEnd">
+          <span className="lightFont">{`${time}`} Mins</span>
+        </div>
+        <p>{text}</p>
+      </div>
+    );
   };
   return (
     <div className="container2 padChildren">
@@ -57,7 +65,7 @@ const TestPage = () => {
       >
         <div className="lucius">
           <Form
-            onFinish={(vals) => handleSubmit()}
+            onFinish={(vals) => handleSubmit(userInfo)}
             name="basic"
             size="large"
             onFinishFailed={() => null}
@@ -176,13 +184,7 @@ const TestPage = () => {
         </Button>
         {/* </Link> */}
       </div>
-      <div className="grid3 margin-t-b">
-        <TestTemplateCard />
-        <TestTemplateCard />
-        <TestTemplateCard />
-        <TestTemplateCard />
-        <TestTemplateCard />
-      </div>
+      <div className="grid3 margin-t-b">{templates.map(TestTemplateCard)}</div>
     </div>
   );
 };

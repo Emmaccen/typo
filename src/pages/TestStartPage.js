@@ -23,19 +23,15 @@ const TestStartPage = () => {
   const [endTest, setEndTest] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [userInfo, setUserInfo] = useState({
-    totalTestWords: `${calculator.checkTotalWords(content)}`,
-    averageTimeRequired: `${calculator.calculateAverageTimeRequiredToType(
-      content
-    )}`,
-    textContent: content,
-    totalTimeSet: 10_000,
-    timeLeft: "",
+    totalTestWords: 0,
+    averageTimeRequired: 0,
+    textContent: "",
   });
   const [result, setResult] = useState({
     correctWords: 0,
     wrongWords: 0,
-    totalTypedWords: "",
-    completionStatus: "",
+    totalTypedWords: 0,
+    completionStatus: 0,
     accuracy: 0,
   });
 
@@ -48,10 +44,23 @@ const TestStartPage = () => {
   useEffect(() => {
     // window.speechSynthesis.speak(new SpeechSynthesisUtterance(content));
     let data = dataHandler.getStateFromLocalStorage("userInfo");
-    setUserTimer({
-      initialTime: data.userTimer,
-      timeLeft: data.userTimer,
-    });
+    if (data) {
+      const { userTimer, textContent } = data;
+      setUserTimer({
+        initialTime: userTimer,
+        timeLeft: userTimer,
+      });
+      setUserInfo({
+        totalTestWords: `${calculator.checkTotalWords(textContent)}`,
+        averageTimeRequired: `${calculator.calculateAverageTimeRequiredToType(
+          textContent
+        )}`,
+        textContent,
+      });
+    } else {
+      // no test/challenge has been initiated
+      navigate("/test", { replace: true });
+    }
   }, []);
 
   useEffect(() => {
@@ -90,8 +99,9 @@ const TestStartPage = () => {
       <div className="grid textInputArea">
         <div className="actionArea">
           <TypingTextContainer
-            text={content}
+            text={userInfo.textContent}
             time={userInfo.averageTimeRequired}
+            wordCount={userInfo.totalTestWords}
           />
           <TextArea
             onChange={(e) => setUserInput(e.target.value.toLowerCase())}

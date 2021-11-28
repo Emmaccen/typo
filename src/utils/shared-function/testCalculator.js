@@ -26,13 +26,15 @@ const calculateAverageTimeRequiredToType = (content, userTimer = false) => {
 
 const recalculateUserResults = (userInfo, userInput) => {
   let values = calculateCorrectAndWrongWords(userInput, userInfo.textContent);
+  console.log(values);
   values["accuracy"] = (
     (values.correctWords / userInfo.totalTestWords) *
     100
   ).toFixed(0);
-  values["totalTypedWords"] = userInput.trim().split(" ").length;
+  values["totalTypedWords"] =
+    userInput.trim() === "" ? 0 : userInput.trim().split(" ").length;
   values["completionStatus"] = (
-    (values.totalTypedWords / userInfo.totalTestWords) *
+    (values["totalTypedWords"] / userInfo.totalTestWords) *
     100
   ).toFixed(0);
   return values;
