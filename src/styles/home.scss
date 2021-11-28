@@ -1,2 +1,56 @@
+@import "./variables.scss";
+
 .lucius {
+  .homepageWrapper {
+    .landingContainer {
+      height: 500px;
+      background: linear-gradient(
+        107.35deg,
+        rgba(196, 196, 196, 0) 20.83%,
+        rgba(47, 128, 237, 0.09) 78.13%
+      );
+      .jumbotron {
+        .content {
+          width: 45%;
+          h1 {
+            font-size: 50px;
+            font-weight: 700;
+            line-height: normal;
+            color: $three;
+          }
+          ul {
+            margin-top: 20px;
+            li {
+              color: $title;
+              font-weight: 600;
+              margin-right: 15px;
+              &::before {
+                content: "\2022";
+                color: $primaryColor;
+                font-weight: 700;
+                display: inline-block;
+                width: 1em;
+                margin-left: -1em;
+              }
+            }
+          }
+        }
+      }
+    }
+    .onboarding {
+      .textArea {
+        width: 55%;
+        h2,
+        p {
+          color: $title;
+          font-weight: 500;
+        }
+        h2 {
+          font-weight: 600;
+          font-size: 25px;
+          line-height: normal;
+        }
+      }
+    }
+  }
 }

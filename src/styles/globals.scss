@@ -143,6 +143,15 @@ li {
     border-radius: $radius;
     color: #fff;
   }
+  .largeBtn,
+  .smallBtn {
+    min-width: 130px;
+    color: #fff;
+    background-color: $accentColor;
+  }
+  .smallBtn {
+    min-width: 100px;
+  }
   .primaryColor {
     color: $primaryColor;
   }

@@ -19,7 +19,7 @@ const TestTemplateCard = () => {
 
 const TestPage = () => {
   return (
-    <div>
+    <div className="container2 padChildren">
       <div className="centered textCenter">
         <h2 className="title heading">
           Choose from our long list of template or C/P your own essay
