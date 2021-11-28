@@ -4,13 +4,31 @@
   .testStartPageContainer {
     margin-top: 50px;
     .textInputArea {
-      grid-template-columns: 70% 30%;
+      grid-template-columns: 65% 35%;
       gap: 30px;
       .analytics {
         border: 0.5px solid $borderColor;
         padding: 15px;
         border-radius: $radius;
         align-items: flex-start;
+        .badges {
+          .ant-badge {
+            margin-right: 15px;
+            svg {
+              font-size: 30px;
+              color: $fadeText;
+            }
+          }
+        }
+        .progressBars {
+          margin-top: 20px;
+          .ant-divider {
+            margin: 15px 0px;
+          }
+          p {
+            margin-bottom: 0px;
+          }
+        }
       }
       textarea {
         margin-top: 20px;

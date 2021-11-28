@@ -24,10 +24,6 @@ const calculateAverageTimeRequiredToType = (content, userTimer = false) => {
   return `${Math.ceil(time)}`;
 };
 
-const calculateTimeLeft = ({ timeRequiredToType }, startTime) => {
-  // const timeLeft = ((new Date() + timeRequiredToType) - startTime) /
-};
-
 const recalculateUserResults = (userInfo, userInput) => {
   let values = calculateCorrectAndWrongWords(userInput, userInfo.textContent);
   values["accuracy"] = (
@@ -58,6 +54,14 @@ const calculateCorrectAndWrongWords = (userInput, textContent) => {
   return { correctWords, wrongWords };
 };
 
+const calculateTimeLeft = ({ initialTime, timeLeft }) => {
+  //   let left = (((timeLeft - 1000) / initialTime) * 100).toFixed(0);
+  return {
+    initialTime,
+    timeLeft: timeLeft - 1000,
+  };
+};
+
 export const calculator = {
   checkTotalWords: (textContent) => checkTotalWords(textContent),
   calculateAverageTimeRequiredToType: (textContent) =>
@@ -66,4 +70,5 @@ export const calculator = {
     calculateCorrectAndWrongWords(userInput, textContent),
   recalculateUserResults: (result, userInfo, userInput) =>
     recalculateUserResults(result, userInfo, userInput),
+  calculateTimeLeft: (timeObject) => calculateTimeLeft(timeObject),
 };

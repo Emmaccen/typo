@@ -1,8 +1,9 @@
+import { CheckCircleOutlined, WarningOutlined } from "@ant-design/icons";
+import { Badge, Input, Progress, Divider } from "antd";
 import React, { useEffect, useState } from "react";
-import { Progress, Input } from "antd";
 import TypingTextContainer from "../components/shared-components/TypingTextContainer";
-import { calculator } from "../utils/shared-function/testCalculator";
 import "../styles/testStartPage.scss";
+import { calculator } from "../utils/shared-function/testCalculator";
 const { TextArea } = Input;
 
 const content =
@@ -11,8 +12,10 @@ const content =
 const TestStartPage = () => {
   const [refresh, setRefresh] = useState(false);
   const [userTimer, setUserTimer] = useState({
-    initialTime: 60_000,
+    initialTime: 120_000,
+    timeLeft: 120_000,
   });
+  const [endTest, setEndTest] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [userInfo, setUserInfo] = useState({
     totalTestWords: `${calculator.checkTotalWords(content)}`,
@@ -45,18 +48,25 @@ const TestStartPage = () => {
     // window.speechSynthesis.speak(new SpeechSynthesisUtterance(content));
   }, []);
 
-  //   const recalculateUserResults = () => {
-  //     let values = calculator.calculateCorrectAndWrongWords(userInput, content);
-  //     values["accuracy"] = (
-  //       (values.correctWords / userInfo.totalTestWords) *
-  //       100
-  //     ).toFixed(0);
+  useEffect(() => {
+    const startTimer = setInterval(() => {
+      setUserTimer((time) => {
+        return time.timeLeft >= 1000
+          ? calculator.calculateTimeLeft(time)
+          : (() => {
+              clearInterval(startTimer);
+              console.log("running this line...");
+              return time;
+            })();
+      });
+    }, 1000);
+    return () => {
+      clearInterval(startTimer);
+    };
+  }, []);
 
-  //     setResult({ ...result, ...values });
-  //     console.log({ result });
-  //   };
   return (
-    <div className="testStartPageContainer">
+    <div className="testStartPageContainer container1 padChildren">
       <div className="grid textInputArea">
         <div className="actionArea">
           <TypingTextContainer
@@ -71,20 +81,51 @@ const TestStartPage = () => {
           />
         </div>
 
-        <div className="centered analytics">
-          <div>
-            <div className="textCenter">
-              <Progress type="circle" percent={30} width={150} />
-              <p>Time Left</p>
+        <div className="analytics">
+          <div className="centered">
+            <div>
+              <div className="textCenter">
+                <div>
+                  <Progress
+                    type="circle"
+                    percent={(
+                      (userTimer.timeLeft / userTimer.initialTime) *
+                      100
+                    ).toFixed(0)}
+                    width={150}
+                    strokeColor={
+                      (
+                        (userTimer.timeLeft / userTimer.initialTime) *
+                        100
+                      ).toFixed(0) > 30
+                        ? null
+                        : "red"
+                    }
+                  />
+                  <p>Time Left</p>
+                </div>
+              </div>
+              <div className="centered">
+                <div className="badges flex">
+                  <Badge showZero status="success" count={result.correctWords}>
+                    <CheckCircleOutlined />
+                  </Badge>
+                  <Badge showZero count={result.wrongWords}>
+                    <WarningOutlined />
+                  </Badge>
+                </div>
+              </div>
             </div>
-            <div className="flexWrap">
-              <span className="capsule textnoWrap">
-                Total Words : {calculator.checkTotalWords(content)}
-                Correct Words : {result.correctWords}
-                Wrong Words : {result.wrongWords}
-                Accuracy : {result.accuracy}% completionStatus :
-                {result.completionStatus}%
-              </span>
+          </div>
+          <div className="progressBars">
+            <div>
+              <p>Accuracy</p>
+              <Progress percent={result.accuracy} status="active" />
+            </div>
+            <Divider />
+            <div>
+              <p>completion Status</p>
+              <Progress percent={result.completionStatus} status="active" />
             </div>
           </div>
         </div>
