@@ -25,7 +25,7 @@ const Home = () => {
               <li>Cave-hacking level Guaranteed </li>
             </ul>
           </div>
-          <div className="flexEnd">
+          <div className="flexEnd jumboImage">
             <img alt="description" src="/assets/jetpack.svg"></img>
           </div>
         </div>
@@ -47,12 +47,12 @@ const Home = () => {
                 Get Started
               </Button>
             </div>
-            <div>
+            <div className="onboardingImg">
               <img alt="description" src="/assets/onboard1.svg"></img>
             </div>
           </div>
           <div className="flex-space-btw onboarding margin-t-b">
-            <div>
+            <div className="onboardingImg">
               <img alt="description" src="/assets/onboard2.svg"></img>
             </div>
             <div className="textArea">
@@ -80,7 +80,7 @@ const Home = () => {
                 Get Started
               </Button>
             </div>
-            <div>
+            <div className="onboardingImg">
               <img alt="description" src="/assets/onboard3.svg"></img>
             </div>
           </div>

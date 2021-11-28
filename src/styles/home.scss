@@ -3,6 +3,9 @@
 .lucius {
   .homepageWrapper {
     .landingContainer {
+      @media (max-width: 600px) {
+        height: 400px;
+      }
       height: 500px;
       background: linear-gradient(
         107.35deg,
@@ -36,8 +39,28 @@
           }
         }
       }
+      @media (max-width: 850px) {
+        .jumboImage {
+          display: none;
+        }
+        .jumbotron {
+          .content {
+            width: 100%;
+            @media (max-width: 600px) {
+              text-align: center;
+              h1 {
+                font-size: 40px;
+              }
+              ul {
+                justify-content: center;
+              }
+            }
+          }
+        }
+      }
     }
     .onboarding {
+      margin-bottom: 100px;
       .textArea {
         width: 55%;
         h2,
@@ -49,6 +72,19 @@
           font-weight: 600;
           font-size: 25px;
           line-height: normal;
+        }
+      }
+      @media (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        &:nth-child(2) {
+          .onboardingImg {
+            order: 2;
+          }
+        }
+        .textArea {
+          width: 100%;
+          margin-bottom: 20px;
         }
       }
     }

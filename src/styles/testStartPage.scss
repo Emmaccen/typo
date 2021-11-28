@@ -51,6 +51,17 @@
           overflow-y: auto;
         }
       }
+      @media (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        .actionArea {
+          order: 2;
+        }
+        .analytics {
+          margin-bottom: 40px;
+          order: 1;
+        }
+      }
     }
   }
 }

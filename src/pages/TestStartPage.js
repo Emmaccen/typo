@@ -3,7 +3,7 @@ import {
   WarningOutlined,
   ArrowLeftOutlined,
 } from "@ant-design/icons";
-import { Badge, Input, Progress, Divider, Button } from "antd";
+import { Badge, Input, Progress, Divider, Button, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import TypingTextContainer from "../components/shared-components/TypingTextContainer";
 import "../styles/testStartPage.scss";
@@ -19,6 +19,7 @@ const TestStartPage = () => {
   const [refresh, setRefresh] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  // const window.speechSynthesis = window.speechSynthesis;
 
   const [userTimer, setUserTimer] = useState({
     initialTime: 0,
@@ -26,6 +27,7 @@ const TestStartPage = () => {
   });
   const [startTest, setStartTest] = useState(false);
   const [submit, setSubmit] = useState(false);
+  const [read, setRead] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [userInfo, setUserInfo] = useState({
     totalTestWords: 0,
@@ -75,13 +77,20 @@ const TestStartPage = () => {
         ...result,
         ...calculator.recalculateUserResults(userInfo, userInput),
       });
-    }, 2000);
+    }, 1000);
   }, [refresh]);
 
   useEffect(() => {
-    // window.speechSynthesis.speak(new SpeechSynthesisUtterance(content));
     submit && submitAssessment();
   }, [submit]);
+
+  // useEffect(() => {
+  //   read
+  //     ? window.speechSynthesis.speak(
+  //         new SpeechSynthesisUtterance("userInfo.textContent")
+  //       )
+  //     : window.speechSynthesis.pause();
+  // }, [read]);
 
   useEffect(() => {
     const startTimer = setInterval(() => {
@@ -121,6 +130,9 @@ const TestStartPage = () => {
           <ArrowLeftOutlined /> <span>Back</span>
         </Link>
       </div>
+      {/* <div>
+        <Switch onChange={() => setRead(!read)} />
+      </div> */}
       <div className="grid textInputArea">
         <div className="actionArea">
           <TypingTextContainer

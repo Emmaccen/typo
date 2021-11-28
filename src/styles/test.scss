@@ -1,0 +1,19 @@
+@import "./variables.scss";
+.lucius {
+  .padChildren {
+    .heading {
+      @media (max-width: 800px) {
+        width: 90%;
+      }
+    }
+    .grid3 {
+      align-items: baseline;
+      @media (max-width: 800px) {
+        grid-template-columns: 1fr 1fr;
+        @media (max-width: 600px) {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}
