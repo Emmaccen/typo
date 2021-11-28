@@ -1,8 +1,17 @@
 @import "./variables.scss";
 
 .lucius {
+  .details {
+    margin-top: 60px;
+  }
   .testStartPageContainer {
     margin-top: 50px;
+    .navigate {
+      margin-bottom: 20px;
+      span {
+        margin-left: 8px;
+      }
+    }
     .textInputArea {
       grid-template-columns: 65% 35%;
       gap: 30px;

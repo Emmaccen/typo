@@ -1,10 +1,14 @@
-import { CheckCircleOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  WarningOutlined,
+  ArrowLeftOutlined,
+} from "@ant-design/icons";
 import { Badge, Input, Progress, Divider, Button } from "antd";
 import React, { useEffect, useState } from "react";
 import TypingTextContainer from "../components/shared-components/TypingTextContainer";
 import "../styles/testStartPage.scss";
 import { calculator } from "../utils/shared-function/testCalculator";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { dataHandler } from "../utils/shared-function/dataHandler";
 const { TextArea } = Input;
 
@@ -17,10 +21,11 @@ const TestStartPage = () => {
   const navigate = useNavigate();
 
   const [userTimer, setUserTimer] = useState({
-    initialTime: 120_000,
-    timeLeft: 120_000,
+    initialTime: 0,
+    timeLeft: 0,
   });
-  const [endTest, setEndTest] = useState(false);
+  const [startTest, setStartTest] = useState(false);
+  const [submit, setSubmit] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [userInfo, setUserInfo] = useState({
     totalTestWords: 0,
@@ -70,12 +75,13 @@ const TestStartPage = () => {
         ...result,
         ...calculator.recalculateUserResults(userInfo, userInput),
       });
-    }, 5000);
+    }, 2000);
   }, [refresh]);
 
   useEffect(() => {
     // window.speechSynthesis.speak(new SpeechSynthesisUtterance(content));
-  }, []);
+    submit && submitAssessment();
+  }, [submit]);
 
   useEffect(() => {
     const startTimer = setInterval(() => {
@@ -83,8 +89,8 @@ const TestStartPage = () => {
         return time.timeLeft >= 1
           ? calculator.calculateTimeLeft(time)
           : (() => {
+              setSubmit(true);
               clearInterval(startTimer);
-              console.log("running this line...");
               return time;
             })();
       });
@@ -94,8 +100,27 @@ const TestStartPage = () => {
     };
   }, []);
 
-  return (
+  const submitAssessment = () => {
+    let typingSpeed = calculator.typingSpeed(result, userTimer);
+    let testScore = { ...userTimer, ...userInfo, ...result, ...typingSpeed };
+    // add new grade, but also! add keep previous ones so...
+    let previousGrades = dataHandler.getStateFromLocalStorage("grades");
+    previousGrades
+      ? dataHandler.setStateInLocalStorage("grades", [
+          ...previousGrades,
+          testScore,
+        ])
+      : dataHandler.setStateInLocalStorage("grades", [testScore]);
+    navigate("/dashboard", { replace: true });
+  };
+
+  return startTest ? (
     <div className="testStartPageContainer container1 padChildren">
+      <div className="flex navigate">
+        <Link to="/test" className="centered">
+          <ArrowLeftOutlined /> <span>Back</span>
+        </Link>
+      </div>
       <div className="grid textInputArea">
         <div className="actionArea">
           <TypingTextContainer
@@ -114,10 +139,15 @@ const TestStartPage = () => {
               className="largeBtn"
               style={{ backgroundColor: "#333" }}
               size="large"
+              onClick={() => setUserInput("")}
             >
               Clear / Reset
             </Button>
-            <Button className="largeBtn" size="large">
+            <Button
+              onClick={() => setSubmit(true)}
+              className="largeBtn"
+              size="large"
+            >
               Submit Challenge
             </Button>
           </div>
@@ -171,6 +201,22 @@ const TestStartPage = () => {
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  ) : (
+    <div className="centered padChildren details">
+      <div className="cardBackground textCenter">
+        <p>
+          Your timer will start automatically after you click the start button.
+        </p>
+        <p>Good luck! 👍</p>
+        <Button
+          onClick={() => setStartTest(true)}
+          className="largeBtn"
+          size="large"
+        >
+          Start Challenge
+        </Button>
       </div>
     </div>
   );

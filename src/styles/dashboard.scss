@@ -1,2 +1,15 @@
+@import "./variables.scss";
 .lucius {
+  .dashboardPage {
+    .cardBackground {
+      margin-bottom: 30px;
+      .ant-badge {
+        margin-right: 15px;
+        svg {
+          font-size: 30px;
+          color: $fadeText;
+        }
+      }
+    }
+  }
 }

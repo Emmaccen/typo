@@ -9,6 +9,12 @@ const config = {
 const checkTotalWords = (content) => {
   return content.split(" ").length;
 };
+const typingSpeed = ({ totalTypedWords }, { initialTime, timeLeft }) => {
+  console.log(totalTypedWords, initialTime, timeLeft);
+  return {
+    typingSpeed: `${Math.round((initialTime - timeLeft) / totalTypedWords)}`,
+  };
+};
 const calculateAverageTimeRequiredToType = (content, userTimer = false) => {
   // decided not to use the user timer in this function anymore
   // but I'll leave it be for now (since average time is calculated based on config)
@@ -26,7 +32,6 @@ const calculateAverageTimeRequiredToType = (content, userTimer = false) => {
 
 const recalculateUserResults = (userInfo, userInput) => {
   let values = calculateCorrectAndWrongWords(userInput, userInfo.textContent);
-  console.log(values);
   values["accuracy"] = (
     (values.correctWords / userInfo.totalTestWords) *
     100
@@ -73,4 +78,5 @@ export const calculator = {
   recalculateUserResults: (result, userInfo, userInput) =>
     recalculateUserResults(result, userInfo, userInput),
   calculateTimeLeft: (timeObject) => calculateTimeLeft(timeObject),
+  typingSpeed: (result, userTimer) => typingSpeed(result, userTimer),
 };
