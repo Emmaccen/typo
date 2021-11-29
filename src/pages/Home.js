@@ -14,9 +14,11 @@ const Home = () => {
                 <span className="primaryColor">"Typo"</span>
               </h1>
             </div>
-            <Button className="largeBtn" size="large">
-              Get Started
-            </Button>
+            <Link to="/test">
+              <Button className="largeBtn" size="large">
+                Get Started
+              </Button>
+            </Link>
             <ul className="flexWrap">
               <li>Real time speed tracking</li>
               <li>In-time error checking</li>
@@ -43,9 +45,11 @@ const Home = () => {
                 is a long established fact, layout. It is a long established
                 fact
               </p>
-              <Button size="large" className="smallBtn">
-                Get Started
-              </Button>
+              <Link to="/test">
+                <Button size="large" className="smallBtn">
+                  Get Started
+                </Button>
+              </Link>
             </div>
             <div className="onboardingImg">
               <img alt="description" src="/assets/onboard1.svg"></img>
@@ -63,9 +67,11 @@ const Home = () => {
                 layout. It is a long established fact layout. It is a long
                 established fact
               </p>
-              <Button size="large" className="smallBtn">
-                Get Started
-              </Button>
+              <Link to="/test">
+                <Button size="large" className="smallBtn">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="flex-space-btw onboarding margin-t-b">
@@ -76,9 +82,11 @@ const Home = () => {
                 by the readable content of a page when looking at its layout.
                 layout. It is a long established fact established fact
               </p>
-              <Button size="large" className="smallBtn">
-                Get Started
-              </Button>
+              <Link to="/test">
+                <Button size="large" className="smallBtn">
+                  Get Started
+                </Button>
+              </Link>
             </div>
             <div className="onboardingImg">
               <img alt="description" src="/assets/onboard3.svg"></img>

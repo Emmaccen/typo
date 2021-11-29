@@ -12,9 +12,6 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { dataHandler } from "../utils/shared-function/dataHandler";
 const { TextArea } = Input;
 
-const content =
-  "Of course, describing real objects as both particles and waves is necessarily somewhat imprecise. Properly speaking, the objects described by quantum physics are neither particles nor waves, but a third category that shares some properties of waves";
-
 const TestStartPage = () => {
   const [refresh, setRefresh] = useState(false);
   const location = useLocation();
@@ -94,20 +91,21 @@ const TestStartPage = () => {
 
   useEffect(() => {
     const startTimer = setInterval(() => {
-      setUserTimer((time) => {
-        return time.timeLeft >= 1
-          ? calculator.calculateTimeLeft(time)
-          : (() => {
-              setSubmit(true);
-              clearInterval(startTimer);
-              return time;
-            })();
-      });
+      startTest &&
+        setUserTimer((time) => {
+          return time.timeLeft >= 1
+            ? calculator.calculateTimeLeft(time)
+            : (() => {
+                setSubmit(true);
+                clearInterval(startTimer);
+                return time;
+              })();
+        });
     }, 1000);
     return () => {
       clearInterval(startTimer);
     };
-  }, []);
+  }, [startTest]);
 
   const submitAssessment = () => {
     let typingSpeed = calculator.typingSpeed(result, userTimer);

@@ -51,7 +51,7 @@ const TestPage = () => {
         <div className="flexEnd">
           <span className="lightFont">{`${time}`} Mins</span>
         </div>
-        <p>{text}</p>
+        <p>{text.slice(0, 200).concat("...")}</p>
       </div>
     );
   };

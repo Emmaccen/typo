@@ -11,9 +11,7 @@ const NavBar = () => {
           className="logo"
         ></img>
         <div className="navLinks">
-          <Link activeStyle={{ color: "#2f80ed" }} to="/">
-            Home
-          </Link>
+          <Link to="/">Home</Link>
           <Link to="/test">Test Page</Link>
           <Link to="/dashboard">Dashboard</Link>
         </div>

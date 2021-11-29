@@ -20,9 +20,9 @@ const Dashboard = () => {
         </Link>
       </div>
       <h1 className="title">Dashboard</h1>
-      {data.map((grade) => {
+      {data.map((grade, i) => {
         return (
-          <div className="analytics cardBackground">
+          <div key={i} className="analytics cardBackground">
             <Badge showZero status="success" count={grade.correctWords}>
               <CheckCircleOutlined />
             </Badge>
