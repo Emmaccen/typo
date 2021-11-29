@@ -83,6 +83,12 @@ li {
         color: $primaryColor;
       }
     }
+    .navLinks {
+      display: flex;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
   }
   .footer {
     font-family: "mali";
