@@ -9,6 +9,11 @@ const config = {
 const checkTotalWords = (content) => {
   return content.split(" ").length;
 };
+
+const highlightWrongWords = (content) => {
+  return null;
+};
+
 const typingSpeed = ({ totalTypedWords }, { initialTime, timeLeft }) => {
   console.log(totalTypedWords, initialTime, timeLeft);
   return {
@@ -49,16 +54,27 @@ const calculateCorrectAndWrongWords = (userInput, textContent) => {
   // this comparism is case-insensitive
   let correctWords = 0;
   let wrongWords = 0;
+  let wrongWordTexts = [];
   // remove trailing whitespace and split words
-  let auditWords = userInput.trim().split(" ");
+  let auditWords = textContent.trim().split(" ");
 
-  textContent
-    .trim()
-    .split(" ")
-    .forEach((word, index) => {
-      word.toLowerCase() == auditWords[index] ? correctWords++ : wrongWords++;
-    });
-  return { correctWords, wrongWords };
+  if (userInput === "" || userInput.trim().split(" ")[0] === "") {
+    // console.log(userInput.trim().split(" ")[0]);
+    return { correctWords: 0, wrongWords: 0 };
+  } else {
+    userInput
+      .trim()
+      .split(" ")
+      .forEach((word, index) => {
+        word.toLowerCase() === auditWords[index].toLowerCase()
+          ? correctWords++
+          : (() => {
+              wrongWordTexts.push({ [index]: word });
+              wrongWords++;
+            })();
+      });
+    return { correctWords, wrongWords, wrongWordTexts };
+  }
 };
 
 const calculateTimeLeft = ({ initialTime, timeLeft }) => {

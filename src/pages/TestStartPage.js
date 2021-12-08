@@ -34,6 +34,7 @@ const TestStartPage = () => {
   const [result, setResult] = useState({
     correctWords: 0,
     wrongWords: 0,
+    wrongWordTexts: [],
     totalTypedWords: 0,
     completionStatus: 0,
     accuracy: 0,
@@ -134,12 +135,13 @@ const TestStartPage = () => {
       <div className="grid textInputArea">
         <div className="actionArea">
           <TypingTextContainer
+            wrongWordsToHighlight={result.wrongWordTexts}
             text={userInfo.textContent}
             time={userInfo.averageTimeRequired}
             wordCount={userInfo.totalTestWords}
           />
           <TextArea
-            onChange={(e) => setUserInput(e.target.value.toLowerCase())}
+            onChange={(e) => setUserInput(e.target.value)}
             value={userInput}
             placeholder="Start typing here..."
             rows={6}
